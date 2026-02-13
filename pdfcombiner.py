@@ -15,7 +15,21 @@ def get_creation_time(filepath):
 def merge_pdfs():
     # 1. Setup
     writer = PdfWriter()
-    output_filename = "SAS_Viya_Master_Course.pdf"
+    
+while True:
+    output_filename = input("What do you want your combined file to be named? ").strip()
+
+    if not output_filename:
+        output_filename = "merged.pdf"
+
+    if not output_filename.lower().endswith(".pdf"):
+        output_filename += ".pdf"
+
+    if not os.path.exists(output_filename):
+        break
+
+    print("That file already exists. Choose another name.")
+
     
     # 2. Get all PDF files
     # We exclude the output file so we don't try to merge it into itself if re-run
@@ -86,4 +100,5 @@ def merge_pdfs():
     print("\nSuccess!")
 
 if __name__ == "__main__":
+
     merge_pdfs()
